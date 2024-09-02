@@ -6,6 +6,7 @@ import (
 
 type Client struct {
 	token      string
+	secret     string
 	instance   string
 	baseUrl    string
 	httpClient *http.Client
@@ -32,6 +33,13 @@ func NewClient(opts ...Option) *Client {
 func WithToken(token string) Option {
 	return func(c *Client) {
 		c.token = token
+	}
+}
+
+// WithSecret sets the token of the client
+func WithSecret(secret string) Option {
+	return func(c *Client) {
+		c.secret = secret
 	}
 }
 
