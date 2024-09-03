@@ -34,7 +34,7 @@ func (s *Client) Status() (*StatusResponse, error) {
 		}
 
 		bodyErr := errors.New(string(body))
-		return nil, fmt.Errorf("failed to set delivery webhook with code %d: %w", resp.StatusCode, bodyErr)
+		return nil, fmt.Errorf("failed to get status with code %d: %w", resp.StatusCode, bodyErr)
 	}
 
 	var toReturn StatusResponse
@@ -68,4 +68,24 @@ func (s *Client) QrCodeImage() (*QrCodeImageResponse, error) {
 	}
 
 	return &toReturn, nil
+}
+
+func (s *Client) Disconnect() error {
+	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(disconnectEndpoint, s.instance, s.token))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+
+		bodyErr := errors.New(string(body))
+		return fmt.Errorf("failed to get qr code with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	return nil
 }
