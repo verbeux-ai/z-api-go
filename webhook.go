@@ -8,11 +8,11 @@ import (
 )
 
 type WebhookDeliveryRequest struct {
-	Value string `json:"phone,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type WebhookReceivedRequest struct {
-	Value string `json:"phone,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 func (s *Client) SetWebhookDelivery(d *WebhookDeliveryRequest) error {
