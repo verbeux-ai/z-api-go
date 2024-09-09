@@ -9,21 +9,19 @@ Status: Em desenvolvimento
 Este é um exemplo de envio de mensagem a partir do client.
 
 ```go
-import (
-z_api "github.com/verbeux-ai/z-api-go"
-)
+import z_api "github.com/verbeux-ai/z-api-go"
 
 client := z_api.NewClient(
-z_api.WithToken("<token>"),
-z_api.WithInstance("<instance>"),
-z_api.WithSecret("<secret>"),
+    z_api.WithToken("<token>"),
+    z_api.WithInstance("<instance>"),
+    z_api.WithSecret("<secret>"),
 )
 response, err := client.SendTextMessage(&z_api.TextMessageRequest{
-Phone:   text.Phone,
-Message: txt,
+    Phone:   text.Phone,
+    Message: txt,
 })
 if err != nil {
-panic(err)
+    panic(err)
 }
 fmt.Println(response)
 ```
@@ -37,20 +35,20 @@ import "github.com/verbeux-ai/z-api-go/listener"
 
 whatsappListener := listener.NewMessageListener()
 whatsappListener.HandleErrors(func (err error) {
-zap.L().Error("fail", zap.Error(err))
+    fmt.Println("fail", err)
 })
 
 // register listeners
 whatsappListener.OnMessage(func (message *listener.WebhookMessage) error {
-if message.Text != nil {
-return s.useCase.HandleTextMessage(ctx.Request().Context(), message, zAPIInstance)
-}
-
-return nil
+    if message.Text != nil {
+        // treat your text message here
+    }
+    
+    return nil
 })
 
 if err := whatsappListener.ReadBodyAsync(ctx.Request().Body); err != nil {
-return ctx.JSON(http.StatusInternalServerError, echo.NewHTTPError(http.StatusInternalServerError, err))
+    panic(err)
 }
 ```
 
