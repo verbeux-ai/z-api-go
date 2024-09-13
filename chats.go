@@ -25,7 +25,7 @@ type ChatMetadataResponse struct {
 	MuteEndTime         interface{} `json:"muteEndTime"`
 	ProfileThumbnail    string      `json:"profileThumbnail"`
 	EphemeralExpiration int         `json:"ephemeralExpiration"`
-	MessagesUnread      string      `json:"messagesUnread"`
+	MessagesUnread      int         `json:"messagesUnread"`
 	About               string      `json:"about"`
 }
 
@@ -54,7 +54,7 @@ func (s *Client) GetChat(phone string) (*ChatMetadataResponse, error) {
 	return &toReturn, nil
 }
 
-func (s *Client) SetChatTag(tagID int, phone string) error {
+func (s *Client) SetChatTag(tagID string, phone string) error {
 	resp, err := s.request(nil, http.MethodPut, fmt.Sprintf(chatAddTagEndpoint, s.instance, s.token, phone, tagID))
 	if err != nil {
 		return err

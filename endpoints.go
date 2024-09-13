@@ -11,7 +11,7 @@ const (
 	disconnectEndpoint  = "instances/%s/token/%s/disconnect"    // GET
 
 	chatEndpoint       = "instances/%s/token/%s/chats/%s"             // GET
-	chatAddTagEndpoint = "instances/%s/token/%s/chats/%s/tags/%d/add" // PUT
+	chatAddTagEndpoint = "instances/%s/token/%s/chats/%s/tags/%s/add" // PUT
 
 	tagsEndpoint = "instances/%s/token/%s/tags" // GET
 )
