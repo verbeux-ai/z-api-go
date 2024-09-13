@@ -25,7 +25,6 @@ type ChatMetadataResponse struct {
 	MuteEndTime         interface{} `json:"muteEndTime"`
 	ProfileThumbnail    string      `json:"profileThumbnail"`
 	EphemeralExpiration int         `json:"ephemeralExpiration"`
-	MessagesUnread      int         `json:"messagesUnread"`
 	About               string      `json:"about"`
 }
 
