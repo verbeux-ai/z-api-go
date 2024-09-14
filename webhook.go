@@ -1,6 +1,7 @@
 package z_api
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -15,8 +16,8 @@ type WebhookReceivedRequest struct {
 	Value string `json:"value,omitempty"`
 }
 
-func (s *Client) SetWebhookDelivery(d *WebhookDeliveryRequest) error {
-	resp, err := s.request(d, http.MethodPut, fmt.Sprintf(webhookDeliveryEndpoint, s.instance, s.token))
+func (s *Client) SetWebhookDelivery(ctx context.Context, d *WebhookDeliveryRequest) error {
+	resp, err := s.request(ctx, d, http.MethodPut, fmt.Sprintf(webhookDeliveryEndpoint, s.instance, s.token))
 	if err != nil {
 		return err
 	}
@@ -35,8 +36,8 @@ func (s *Client) SetWebhookDelivery(d *WebhookDeliveryRequest) error {
 	return nil
 }
 
-func (s *Client) SetWebhookReceived(d *WebhookReceivedRequest) error {
-	resp, err := s.request(d, http.MethodPut, fmt.Sprintf(webhookReceivedEndpoint, s.instance, s.token))
+func (s *Client) SetWebhookReceived(ctx context.Context, d *WebhookReceivedRequest) error {
+	resp, err := s.request(ctx, d, http.MethodPut, fmt.Sprintf(webhookReceivedEndpoint, s.instance, s.token))
 	if err != nil {
 		return err
 	}

@@ -10,13 +10,14 @@ Este é um exemplo de envio de mensagem a partir do client.
 
 ```go
 import z_api "github.com/verbeux-ai/z-api-go"
+import "context"
 
 client := z_api.NewClient(
     z_api.WithToken("<token>"),
     z_api.WithInstance("<instance>"),
     z_api.WithSecret("<secret>"),
 )
-response, err := client.SendTextMessage(&z_api.TextMessageRequest{
+response, err := client.SendTextMessage(context.Background(), &z_api.TextMessageRequest{
     Phone:   text.Phone,
     Message: txt,
 })

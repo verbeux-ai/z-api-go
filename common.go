@@ -2,13 +2,14 @@ package z_api
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 )
 
-func (s *Client) request(reqBody any, method, endpoint string) (*http.Response, error) {
+func (s *Client) request(ctx context.Context, reqBody any, method, endpoint string) (*http.Response, error) {
 	var bodyReader io.Reader
 	if reqBody != nil {
 		marshalledBody, err := json.Marshal(reqBody)
@@ -20,7 +21,7 @@ func (s *Client) request(reqBody any, method, endpoint string) (*http.Response, 
 
 	url := fmt.Sprintf("%s/%s", s.baseUrl, endpoint)
 
-	req, err := http.NewRequest(method, url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, method, url, bodyReader)
 	if err != nil {
 		return nil, err
 	}

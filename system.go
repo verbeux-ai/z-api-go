@@ -1,6 +1,7 @@
 package z_api
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -20,8 +21,8 @@ type QrCodeImageResponse struct {
 	Value string `json:"value"`
 }
 
-func (s *Client) Status() (*StatusResponse, error) {
-	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(statusEndpoint, s.instance, s.token))
+func (s *Client) Status(ctx context.Context) (*StatusResponse, error) {
+	resp, err := s.request(ctx, nil, http.MethodGet, fmt.Sprintf(statusEndpoint, s.instance, s.token))
 	if err != nil {
 		return nil, err
 	}
@@ -45,8 +46,8 @@ func (s *Client) Status() (*StatusResponse, error) {
 	return &toReturn, nil
 }
 
-func (s *Client) QrCodeImage() (*QrCodeImageResponse, error) {
-	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(qrCodeImageEndpoint, s.instance, s.token))
+func (s *Client) QrCodeImage(ctx context.Context) (*QrCodeImageResponse, error) {
+	resp, err := s.request(ctx, nil, http.MethodGet, fmt.Sprintf(qrCodeImageEndpoint, s.instance, s.token))
 	if err != nil {
 		return nil, err
 	}
@@ -70,8 +71,8 @@ func (s *Client) QrCodeImage() (*QrCodeImageResponse, error) {
 	return &toReturn, nil
 }
 
-func (s *Client) Disconnect() error {
-	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(disconnectEndpoint, s.instance, s.token))
+func (s *Client) Disconnect(ctx context.Context) error {
+	resp, err := s.request(ctx, nil, http.MethodGet, fmt.Sprintf(disconnectEndpoint, s.instance, s.token))
 	if err != nil {
 		return err
 	}

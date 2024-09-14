@@ -1,6 +1,7 @@
 package z_api
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -22,8 +23,8 @@ type TextMessageResponse struct {
 	Id        string `json:"id"`
 }
 
-func (s *Client) SendTextMessage(d *TextMessageRequest) (*TextMessageResponse, error) {
-	resp, err := s.request(d, http.MethodPost, fmt.Sprintf(textMessageEndpoint, s.instance, s.token))
+func (s *Client) SendTextMessage(ctx context.Context, d *TextMessageRequest) (*TextMessageResponse, error) {
+	resp, err := s.request(ctx, d, http.MethodPost, fmt.Sprintf(textMessageEndpoint, s.instance, s.token))
 	if err != nil {
 		return nil, err
 	}
