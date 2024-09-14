@@ -1,6 +1,7 @@
 package z_api
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -14,8 +15,8 @@ type TagsResponse struct {
 	Color int    `json:"color"`
 }
 
-func (s *Client) GetTags() ([]TagsResponse, error) {
-	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(tagsEndpoint, s.instance, s.token))
+func (s *Client) GetTags(ctx context.Context) ([]TagsResponse, error) {
+	resp, err := s.request(ctx, nil, http.MethodGet, fmt.Sprintf(tagsEndpoint, s.instance, s.token))
 	if err != nil {
 		return nil, err
 	}

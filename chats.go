@@ -1,6 +1,7 @@
 package z_api
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -28,8 +29,8 @@ type ChatMetadataResponse struct {
 	About               string      `json:"about"`
 }
 
-func (s *Client) GetChat(phone string) (*ChatMetadataResponse, error) {
-	resp, err := s.request(nil, http.MethodGet, fmt.Sprintf(chatEndpoint, s.instance, s.token, phone))
+func (s *Client) GetChat(ctx context.Context, phone string) (*ChatMetadataResponse, error) {
+	resp, err := s.request(ctx, nil, http.MethodGet, fmt.Sprintf(chatEndpoint, s.instance, s.token, phone))
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +54,8 @@ func (s *Client) GetChat(phone string) (*ChatMetadataResponse, error) {
 	return &toReturn, nil
 }
 
-func (s *Client) SetChatTag(tagID string, phone string) error {
-	resp, err := s.request(nil, http.MethodPut, fmt.Sprintf(chatAddTagEndpoint, s.instance, s.token, phone, tagID))
+func (s *Client) SetChatTag(ctx context.Context, tagID string, phone string) error {
+	resp, err := s.request(ctx, nil, http.MethodPut, fmt.Sprintf(chatAddTagEndpoint, s.instance, s.token, phone, tagID))
 	if err != nil {
 		return err
 	}
