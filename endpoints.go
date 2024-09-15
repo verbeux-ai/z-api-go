@@ -1,7 +1,8 @@
 package z_api
 
 const (
-	textMessageEndpoint = "instances/%s/token/%s/send-text" // POST
+	textMessageEndpoint = "instances/%s/token/%s/send-text"    // POST
+	readMessageEndpoint = "instances/%s/token/%s/read-message" // POST
 
 	webhookDeliveryEndpoint = "instances/%s/token/%s/update-webhook-delivery" // PUT
 	webhookReceivedEndpoint = "instances/%s/token/%s/update-webhook-received" // PUT

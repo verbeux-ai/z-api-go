@@ -47,3 +47,33 @@ func (s *Client) SendTextMessage(ctx context.Context, d *TextMessageRequest) (*T
 
 	return &toReturn, nil
 }
+
+type ReadMessageRequest struct {
+	Phone     string `json:"phone"`
+	MessageId string `json:"messageId"`
+}
+
+func (s *Client) ReadMessage(ctx context.Context, phone, messageID string) error {
+	body := ReadMessageRequest{
+		Phone:     phone,
+		MessageId: messageID,
+	}
+
+	resp, err := s.request(ctx, body, http.MethodPost, fmt.Sprintf(readMessageEndpoint, s.instance, s.token))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+
+		bodyErr := errors.New(string(body))
+		return fmt.Errorf("failed to send text message with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	return nil
+}

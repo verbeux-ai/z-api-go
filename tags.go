@@ -32,9 +32,14 @@ func (s *Client) GetTags(ctx context.Context) ([]TagsResponse, error) {
 		return nil, fmt.Errorf("failed to get qr code with code %d: %w", resp.StatusCode, bodyErr)
 	}
 
-	var toReturn []TagsResponse
-	if err = json.NewDecoder(resp.Body).Decode(&toReturn); err != nil {
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
 		return nil, err
+	}
+
+	var toReturn []TagsResponse
+	if err = json.Unmarshal(body, &toReturn); err != nil {
+		return nil, fmt.Errorf("%w: %s", err, string(body))
 	}
 
 	return toReturn, nil
