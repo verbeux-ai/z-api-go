@@ -14,5 +14,6 @@ const (
 	chatEndpoint       = "instances/%s/token/%s/chats/%s"             // GET
 	chatAddTagEndpoint = "instances/%s/token/%s/chats/%s/tags/%s/add" // PUT
 
-	tagsEndpoint = "instances/%s/token/%s/tags" // GET
+	tagsEndpoint      = "instances/%s/token/%s/tags"                // GET
+	createTagEndpoint = "instances/%s/token/%s/business/create-tag" // POST
 )
