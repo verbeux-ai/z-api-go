@@ -11,6 +11,7 @@ const (
 	statusEndpoint      = "instances/%s/token/%s/status"        // GET
 	qrCodeImageEndpoint = "instances/%s/token/%s/qr-code/image" // GET
 	disconnectEndpoint  = "instances/%s/token/%s/disconnect"    // GET
+	deviceEndpoint      = "instances/%s/token/%s/device"        // GET
 
 	chatEndpoint       = "instances/%s/token/%s/chats/%s"             // GET
 	chatAddTagEndpoint = "instances/%s/token/%s/chats/%s/tags/%s/add" // PUT
