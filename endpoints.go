@@ -4,8 +4,9 @@ const (
 	textMessageEndpoint = "instances/%s/token/%s/send-text"    // POST
 	readMessageEndpoint = "instances/%s/token/%s/read-message" // POST
 
-	webhookDeliveryEndpoint = "instances/%s/token/%s/update-webhook-delivery" // PUT
-	webhookReceivedEndpoint = "instances/%s/token/%s/update-webhook-received" // PUT
+	webhookDeliveryEndpoint         = "instances/%s/token/%s/update-webhook-delivery"          // PUT
+	webhookReceivedEndpoint         = "instances/%s/token/%s/update-webhook-received"          // PUT
+	webhookReceivedDeliveryEndpoint = "instances/%s/token/%s/update-webhook-received-delivery" // PUT
 
 	statusEndpoint      = "instances/%s/token/%s/status"        // GET
 	qrCodeImageEndpoint = "instances/%s/token/%s/qr-code/image" // GET
