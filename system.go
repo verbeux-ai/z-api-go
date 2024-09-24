@@ -31,7 +31,7 @@ type DeviceResponse struct {
 	ImgUrl         string             `json:"imgUrl"`
 	Name           string             `json:"name"`
 	Device         DeviceResponseData `json:"device"`
-	OriginalDevice []string           `json:"originalDevice"`
+	OriginalDevice string             `json:"originalDevice"`
 	SessionId      int                `json:"sessionId"`
 	IsBusiness     bool               `json:"isBusiness"`
 }
